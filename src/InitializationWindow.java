@@ -1,9 +1,20 @@
 //import of necessary libraries
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-import java.lang.Math;
-import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JTextField;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class InitializationWindow{
 	Catan mainCatan;
@@ -111,7 +122,7 @@ public class InitializationWindow{
 		initFrame.setSize(500, 120);
 		initFrame.setResizable(false);
 
-		Rectangle rect = (Rectangle)(mainCatan.frame.getBounds());
+		Rectangle rect = mainCatan.frame.getBounds();
 
 		initFrame.setLocation((int)(rect.getX()+(rect.getWidth()/2)-250), (int)(rect.getY()+(rect.getHeight()/2)-50));
 
@@ -148,7 +159,7 @@ public class InitializationWindow{
 
 	private void initNameWindow(){
 		initFrame.setSize(500, numberOfPlayers*80);
-		Rectangle rect = (Rectangle)(mainCatan.frame.getBounds());
+		Rectangle rect = mainCatan.frame.getBounds();
 		initFrame.setLocation((int)(rect.getX()+(rect.getWidth()/2)-250), (int)(rect.getY()+(rect.getHeight()/2)-numberOfPlayers*40));
 
 		createUIS(initFrame.getContentPane());

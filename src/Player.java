@@ -1,5 +1,11 @@
-import java.awt.*;
-import java.awt.geom.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 
 public class Player implements Variable{
@@ -95,19 +101,18 @@ public class Player implements Variable{
 			mes = "Player "+name+":";
 		}
 		g.setFont(traditionalArabicFont);
-		Graphics2D g2d = g;
-        FontMetrics fm = g2d.getFontMetrics();
-        Rectangle2D r = fm.getStringBounds(mes, g2d);
+		FontMetrics fm = g.getFontMetrics();
+        Rectangle2D r = fm.getStringBounds(mes, g);
         x+=2;
         y+=10;
 		g.drawString(mes, x, y+(int)(r.getHeight()/2));
 		y+=(int)(r.getHeight());
 		mes = "Your resources: "+"Wood - "+wood+"; Wool - "+wool+"; Bricks - "+bricks+"; Corn - "+corn+"; Ore - "+ore+";";
-		r = fm.getStringBounds(mes, g2d);
+		r = fm.getStringBounds(mes, g);
 		g.drawString(mes, x, y+(int)(r.getHeight()/2));
 		mes = "Your score is "+score;
 		y+=(int)(r.getHeight());
-		r = fm.getStringBounds(mes, g2d);
+		r = fm.getStringBounds(mes, g);
 		g.drawString(mes, x, y+(int)(r.getHeight()/2));
 	}
 

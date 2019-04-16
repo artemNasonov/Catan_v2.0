@@ -1,11 +1,9 @@
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.io.IOException;
-import java.lang.Math;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class Town implements Variable{
 	int local_x, local_y;

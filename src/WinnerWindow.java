@@ -1,9 +1,14 @@
 //import of necessary libraries
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-import java.lang.Math;
-import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class WinnerWindow{
 	Catan mainCatan;
@@ -42,7 +47,7 @@ public class WinnerWindow{
 		winFrame = new JDialog(mainCatan.frame, "Congratulations!!!", true);
 		winFrame.setSize(500, 100);
 		winFrame.setResizable(false);
-		Rectangle rect = (Rectangle)(mainCatan.frame.getBounds());
+		Rectangle rect = mainCatan.frame.getBounds();
 		winFrame.setLocation((int)(rect.getX()+(rect.getWidth()/2)-250), (int)(rect.getY()+(rect.getHeight()/2)-50));
 
 		confirm.addActionListener(new ActionListener(){

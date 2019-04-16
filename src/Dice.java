@@ -1,12 +1,7 @@
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.lang.Math;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class Dice implements Variable{
 	int num=0;

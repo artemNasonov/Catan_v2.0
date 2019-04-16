@@ -1,7 +1,12 @@
-import javax.imageio.*;
-import java.awt.*;
+import javax.imageio.ImageIO;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.geom.*;
-import java.io.*;
+import java.io.IOException;
 
 public class Field implements Variable{
 	private int number;

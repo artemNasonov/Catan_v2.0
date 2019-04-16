@@ -1,8 +1,5 @@
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-import java.lang.Math;
-import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.Graphics;
 
 public class Road implements Variable{
 	private int start_x, start_y, end_x, end_y;
