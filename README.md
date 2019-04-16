@@ -7,7 +7,7 @@ The implementation of the popular Catan board game on PC
 
 # How to install and play
 ## First way (Preferred)
-1. Download ```.jar```-file last version [from here](https://github.com/artemNasonov/Catan_v2.0 "Link to root of the project, yeah")
+1. Download ```.jar```-file last version [from here](https://github.com/artemNasonov/Catan_v2.0/blob/master/Catan_v2.0.jar "Link to root of the project, yeah")
 2. Run it on your PC
 ## Second way
 1. Download all project
