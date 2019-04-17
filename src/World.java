@@ -77,11 +77,10 @@ public class World extends JPanel{
     }
     
     private void generateWorld(){
-    	ArrayList<Integer> nums = new ArrayList<>();
-		ArrayList<Integer> resources = new ArrayList<>();
+    	ArrayList<Integer> nums = new ArrayList<>(), resources = new ArrayList<>();
 		for(int i=0; i<25; i++){
 			nums.add(i<9?(i/3+2):((i-1)/2+1));
-			resources.add((i/2)%5+1);
+			resources.add(i<20?(i/2)%5+1:25-i);
 		}
 		for(int y=0; y<5; y++){	
 			for(int x=0; x<5; x++){
@@ -117,42 +116,35 @@ public class World extends JPanel{
     	}
     }
 
+    private void addResToPlayer(int res, int player, int num){
+		switch (res) {
+			case 1: players.get(player).addWood(num);
+				break;
+			case 2: players.get(player).addWool(num);
+				break;
+			case 3: players.get(player).addBricks(num);
+				break;
+			case 4: players.get(player).addCorn(num);
+				break;
+			case 5: players.get(player).addOre(num);
+				break;
+		}
+	}
+
     private void addRes(Field f){
     	int addX=f.getX(), addY=f.getY();
     	for(int i=0; i<villa.size(); i++){
     		Village v = villa.get(i);
     		if((v.getX()==addX && v.getY()==addY) || (v.getX()==addX+1 && v.getY()==addY) ||
     			(v.getX()==addX && v.getY()==addY+1) || (v.getX()==addX+1 && v.getY()==addY+1)){
-    			switch (f.getRes()) {
-    				case 1: players.get(v.getPlayer()).addWood(1);
-    						break;
-    				case 2: players.get(v.getPlayer()).addWool(1);
-    						break;
-    				case 3: players.get(v.getPlayer()).addBricks(1);
-    						break;
-    				case 4: players.get(v.getPlayer()).addCorn(1);
-    						break;
-    				case 5: players.get(v.getPlayer()).addOre(1);
-    						break;	
-    			}
+    			addResToPlayer(f.getRes(), v.getPlayer(), 1);
     		}
     	}
     	for(int i=0; i<town.size(); i++){
     		Town t = town.get(i);
     		if((t.getX()==addX && t.getY()==addY) || (t.getX()==addX+1 && t.getY()==addY) ||
     			(t.getX()==addX && t.getY()==addY+1) || (t.getX()==addX+1 && t.getY()==addY+1)){
-    			switch (f.getRes()) {
-    				case 1: players.get(t.getPlayer()).addWood(2);
-    						break;
-    				case 2: players.get(t.getPlayer()).addWool(2);
-    						break;
-    				case 3: players.get(t.getPlayer()).addBricks(2);
-    						break;
-    				case 4: players.get(t.getPlayer()).addCorn(2);
-    						break;
-    				case 5: players.get(t.getPlayer()).addOre(2);
-    						break;	
-    			}
+				addResToPlayer(f.getRes(), t.getPlayer(), 2);
     		}
     	}
     }

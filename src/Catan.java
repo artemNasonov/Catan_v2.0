@@ -39,131 +39,7 @@ public class Catan {
 		InitializationWindow inWin = new InitializationWindow(this);
 		inWin.initProgressBarWindow();
 
-        completeTheMove.addActionListener(new ActionListener() {
-        	@Override
-            public void actionPerformed(ActionEvent e) {
-            	myWorld.updScore();
-	        	if(myWorld.checkEnd(checkSum)==-1){
-	        		if(hod/numberOfPlayers<=1){
-		        		if(checkFirstSteps(myWorld.road, myWorld.villa, hod, 0)){ //if player can complete the move on the first two steps
-			        		type = 0;
-				        	myWorld.updTurn(numberOfPlayers);
-				            hod++;
-				            myWorld.statusBar.setStatus("No items selected");
-			            } else {
-			            	myWorld.statusBar.setStatus("You can't complete the move!!!");
-			            }
-		            } else if(wereRolled) { //if player can complete the move on the next steps
-		            	type = 0;
-				        myWorld.updTurn(numberOfPlayers);
-				        wereRolled=false;
-				        hod++;
-				        myWorld.statusBar.setStatus("No items selected");
-		            } else {
-		            	myWorld.statusBar.setStatus("Roll the dice to complete the move!!!");
-		            }
-	        	} else {
-	        		openFinalWindow();
-	        	}
-            	frame.repaint();
-            }
-        });
-        inWin.setValueOnProgressBar(11);
-        selectRoad.addActionListener(new ActionListener() {
-        	@Override
-            public void actionPerformed(ActionEvent e) {
-            	if(myWorld.checkEnd(checkSum)==-1){
-	            	if(hod/numberOfPlayers<=1) { //if it's first two steps
-	            		if(!checkFirstSteps(myWorld.road, myWorld.villa, hod, 1)){ //if road was not bild yet
-	                		type=1;
-	                		myWorld.statusBar.setStatus("Road was chosen");
-	                		frame.repaint();
-	                	} else {
-	                		myWorld.statusBar.setStatus("You can't build road now!!!");
-	                		frame.repaint();
-	                	}
-	            	} else {
-	            		type=1;
-	                	myWorld.statusBar.setStatus("Road was chosen, it'll cost 1 brick + 1 wood");
-	                	frame.repaint();
-	            	}
-	            }
-            }
-        });
-		inWin.setValueOnProgressBar(12);
-        selectVillage.addActionListener(new ActionListener() {
-        	@Override
-            public void actionPerformed(ActionEvent e) {
-            	if(myWorld.checkEnd(checkSum)==-1){
-		            if(hod/numberOfPlayers<=1){
-		            	if(!checkFirstSteps(myWorld.road, myWorld.villa, hod, 2)){ //if village wasn't build yet
-		                	type=2;
-		                	myWorld.statusBar.setStatus("Village was chosen");
-		                	frame.repaint();
-		                } else {
-		                	myWorld.statusBar.setStatus("You can't build village now!!!");
-		                	frame.repaint();
-		                }
-		            } else {
-		            	type=2;
-		                myWorld.statusBar.setStatus("Village was chosen, it'll cost 1 brick + 1 wood + 1 wool + 1 corn");
-		                frame.repaint();
-		            }
-		        }
-            }
-        });
-		inWin.setValueOnProgressBar(13);
-        selectTown.addActionListener(new ActionListener() {
-        	@Override
-            public void actionPerformed(ActionEvent e) {
-            	if(myWorld.checkEnd(checkSum)==-1){
-		            if(hod/numberOfPlayers>1){ //if it isn't first two steps
-		            	type=3;
-		                myWorld.statusBar.setStatus("Select the village you want to improve, it'll cost 2 corn + 3 Ore");
-		            } else {
-		            	myWorld.statusBar.setStatus("You can't upgrade village now!!!");
-		            }
-		        }
-		        frame.repaint();
-            }
-        });
-		inWin.setValueOnProgressBar(14);
-        rollTheDice.addActionListener(new ActionListener() {
-        	@Override
-            public void actionPerformed(ActionEvent e) {
-            	if(myWorld.checkEnd(checkSum)==-1){
-	            	if(!wereRolled && hod/numberOfPlayers>1){ //if they were not rolled yet and it isn't first two steps, roll the dice
-	            		myWorld.dice1.update();
-				    	myWorld.dice2.update();
-				    	int sum = myWorld.dice1.get()+myWorld.dice2.get();
-				    	myWorld.allocateRes(sum);
-				    	myWorld.statusBar.setStatus("You rolled the dice and the sum is "+sum+"!!!");
-				    	wereRolled=true;
-	            	} else if(wereRolled){ //if they were rolled yet
-	            		myWorld.statusBar.setStatus("You have already rolled the dice!!!");
-	            	} else if(hod/numberOfPlayers<=1){ //if it is first two steps
-	            		myWorld.statusBar.setStatus("You can't roll the dice during the first two moves!!!");
-	            	}
-	            }
-			    frame.repaint();
-            }
-        });
-		inWin.setValueOnProgressBar(15);
-        exchange.addActionListener(new ActionListener(){
-        	@Override
-            public void actionPerformed(ActionEvent e) {
-            	if(myWorld.checkEnd(checkSum)==-1){
-		            if(hod/numberOfPlayers>1){ //if it isn't first two steps
-		            	ExchangeFrame exchangeFrame = new ExchangeFrame(Catan.this);
-		        	} else {
-		            	myWorld.statusBar.setStatus("You can't exchange resources now!!!");
-		            }
-		        }
-            	frame.repaint();
-            }
-        });
-		inWin.setValueOnProgressBar(16);
-
+		addActionListenersToButtons(inWin);
 
         myWorld = new World(addP, inWin);
 		inWin.setValueOnProgressBar(65);
@@ -175,172 +51,299 @@ public class Catan {
 		initButtons(); //add buttons to panel
 		inWin.setValueOnProgressBar(80);
 
-        myWorld.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            	int  mouseX=nearest(e.getX()), mouseY=nearest(e.getY()), t=myWorld.getTurn();
-            	if(myWorld.checkEnd(checkSum)==-1){
-            		// System.out.println("Eche ne konez");
-	            	if(hod/numberOfPlayers>1){//if it isn't first two rounds
-	            		if(type==1){//if road is chosen
-
-		            		if(state ==0){//if the beginning of the road is not selected
-		            			if(haveRes(t, "Road")){//if player has needed resourses
-		            				if(checkRoadStart(mouseX, mouseY, t, myWorld.road, myWorld.villa, myWorld.town)){//if we can start here
-			            				Road r = new Road(mouseX, mouseY, t);
-			            				sx=mouseX; sy=mouseY;
-
-			            				myWorld.statusBar.setStatus("The beginning of the road is marked");
-			            				
-			            				myWorld.road.add(r);
-			            				state =1;//shows that start was selected
-			            			} else {
-			            				type=0;//reset the current mode
-			            				
-			            				myWorld.statusBar.setStatus("You can't start road here!!!");
-			            			}
-		            			} else {
-		            				myWorld.statusBar.setStatus("You have no resources(((");
-		            				type=0;
-		            			}
-		            			frame.repaint();
-		            		} else if(state ==1){//if the start of the road was chosen
-
-		            			if(checkRoadEnd(sx, sy, mouseX, mouseY, myWorld.road)){//if the road does not overlap with another road
-
-			            			if(myWorld.road.get(myWorld.road.size()-1).end(mouseX, mouseY)){//if lenght of the road is equal to one
-			            				myWorld.statusBar.setStatus("The road was successfully built");
-			            				rmRes(t, "Road");
-			            				frame.repaint();
-			            			} else {
-			            				myWorld.statusBar.setStatus("You can't build this road!!!");
-			            				myWorld.road.remove(myWorld.road.size()-1);//delete this road, we can't build it
-			            				frame.repaint();
-			            			}
-			            		} else {
-			            			myWorld.statusBar.setStatus("You can't build this road!!!");
-			            			myWorld.road.remove(myWorld.road.size()-1);
-			            			frame.repaint();
-			            		}
-			            		state = 0;//
-				            	type = 0;//reset all params
-			            	}
-		            	} else if(type==2){//if village was chosen
-		            		if(haveRes(t, "Village")){
-		            			if(checkVillaR(mouseX, mouseY, t, myWorld.road, myWorld.villa, myWorld.town)){
-			            			//if the village is built along the road
-				            		Village v = new Village(mouseX, mouseY, t);
-				            		myWorld.villa.add(v);
-				            		myWorld.statusBar.setStatus("The Village was successfully built");
-				            		myWorld.updScore();
-				            		rmRes(t, "Village");
-				            	} else {
-				            		myWorld.statusBar.setStatus("You can't build village here!!!");
-				            	}	
-		            		} else {
-		            			myWorld.statusBar.setStatus("You have no resources(((");
-		            		}
-		            		type=0;//reset type
-		            		frame.repaint();
-		            	} else if(type==3){
-		            		if(haveRes(t, "Town")){
-		            			int rmbl = checkTown(mouseX, mouseY, t, myWorld.villa);
-		            			//number of village, which we'll upgrade and remove from world
-			            		if(rmbl!=-1){//if it exists
-			            			Town city = new Town(mouseX, mouseY, t);	//\
-			            			myWorld.town.add(city);						// >|upgrade village
-			            			myWorld.villa.remove(rmbl);					///
-			            			myWorld.statusBar.setStatus("The Village was successfully upgraded");
-			            			rmRes(t, "Town");
-			            			myWorld.updScore();
-			            		} else {
-			            			myWorld.statusBar.setStatus("There is no Village to upgrade!!!");
-			            		}	
-		            		} else {
-		            			myWorld.statusBar.setStatus("You have no resources(((");
-		            		}
-		            		type=0;
-		            		frame.repaint();
-		            	}
-	            	} else {//if it's first two rounds:
-	            			//						-the village can be built anywhere in the field;
-	            			//						-the village could not be improved until the city
-	            			//						-resources should not be written off
-	            			//otherwise the same as above
-	            		if(type==1){
-			           		if(state ==0){
-			           			if(checkRoadStart(mouseX, mouseY, t, myWorld.road, myWorld.villa, myWorld.town)){
-			           				Road r = new Road(mouseX, mouseY, t);
-			           				sx=mouseX;
-			           				sy=mouseY;
-			           				myWorld.statusBar.setStatus("The beginning of the road is marked");
-			           				frame.repaint();
-			           				myWorld.road.add(r);
-			           				state =1;
-			           			} else {
-			           				type=0;
-			           				myWorld.statusBar.setStatus("You can't start road here!!!");
-			           				frame.repaint();
-			           			}
-			           		} else if(state ==1){
-			           			if(checkRoadEnd(sx, sy, mouseX, mouseY, myWorld.road)){
-				           			if(myWorld.road.get(myWorld.road.size()-1).end(mouseX, mouseY)){
-				           				myWorld.statusBar.setStatus("The road was successfully built");
-				           				frame.repaint();
-				           			} else {
-				           				myWorld.statusBar.setStatus("You can't build this road!!!");
-				           				myWorld.road.remove(myWorld.road.size()-1);
-				           				frame.repaint();
-				           			}
-				           		} else {
-				           			myWorld.statusBar.setStatus("You can't build this road!!!");
-				           			myWorld.road.remove(myWorld.road.size()-1);
-				           			frame.repaint();
-				           		}
-				           		state = 0;
-					           	type = 0;
-				           	}
-			           	} else if(type==2){
-			            		if(checkVilla(mouseX, mouseY, myWorld.villa, myWorld.town)){
-				            		Village v = new Village(mouseX, mouseY, t);
-				            		myWorld.villa.add(v);
-				            		myWorld.statusBar.setStatus("The Village was successfully built");
-				            		myWorld.updScore();
-				            	} else {
-				            		myWorld.statusBar.setStatus("You can't build village here!!!");
-				            	}	
-			            		type=0;
-			            		frame.repaint();
-			           	} else if(type==3){
-			            		myWorld.statusBar.setStatus("You can't improve the village now!!!");
-			            		type=0;
-			            		frame.repaint();
-			           	}
-	            	}
-	            }
-	            if(myWorld.checkEnd(checkSum)!=-1){
-	            	openFinalWindow();
-            	}
-            	frame.repaint();
-            }
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
+        addMoseListenerToFrame();
 		inWin.setValueOnProgressBar(90);
 
         frame.add(myWorld);	//add panel to frame
 		inWin.close();
         frame.setVisible(true);
+	}
+
+	private void addActionListenersToButtons(InitializationWindow inWin){
+		completeTheMove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				myWorld.updScore();
+				if(myWorld.checkEnd(checkSum)==-1){
+					if(hod/numberOfPlayers<=1){
+						if(checkFirstSteps(myWorld.road, myWorld.villa, hod, 0)){ //if player can complete the move on the first two steps
+							type = 0;
+							myWorld.updTurn(numberOfPlayers);
+							hod++;
+							myWorld.statusBar.setStatus("No items selected");
+						} else {
+							myWorld.statusBar.setStatus("You can't complete the move!!!");
+						}
+					} else if(wereRolled) { //if player can complete the move on the next steps
+						type = 0;
+						myWorld.updTurn(numberOfPlayers);
+						wereRolled=false;
+						hod++;
+						myWorld.statusBar.setStatus("No items selected");
+					} else {
+						myWorld.statusBar.setStatus("Roll the dice to complete the move!!!");
+					}
+				} else {
+					openFinalWindow();
+				}
+				frame.repaint();
+			}
+		});
+		inWin.setValueOnProgressBar(11);
+		selectRoad.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(myWorld.checkEnd(checkSum)==-1){
+					if(hod/numberOfPlayers<=1) { //if it's first two steps
+						if(!checkFirstSteps(myWorld.road, myWorld.villa, hod, 1)){ //if road was not bild yet
+							type=1;
+							myWorld.statusBar.setStatus("Road was chosen");
+							frame.repaint();
+						} else {
+							myWorld.statusBar.setStatus("You can't build road now!!!");
+							frame.repaint();
+						}
+					} else {
+						type=1;
+						myWorld.statusBar.setStatus("Road was chosen, it'll cost 1 brick + 1 wood");
+						frame.repaint();
+					}
+				}
+			}
+		});
+		inWin.setValueOnProgressBar(12);
+		selectVillage.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(myWorld.checkEnd(checkSum)==-1){
+					if(hod/numberOfPlayers<=1){
+						if(!checkFirstSteps(myWorld.road, myWorld.villa, hod, 2)){ //if village wasn't build yet
+							type=2;
+							myWorld.statusBar.setStatus("Village was chosen");
+							frame.repaint();
+						} else {
+							myWorld.statusBar.setStatus("You can't build village now!!!");
+							frame.repaint();
+						}
+					} else {
+						type=2;
+						myWorld.statusBar.setStatus("Village was chosen, it'll cost 1 brick + 1 wood + 1 wool + 1 corn");
+						frame.repaint();
+					}
+				}
+			}
+		});
+		inWin.setValueOnProgressBar(13);
+		selectTown.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(myWorld.checkEnd(checkSum)==-1){
+					if(hod/numberOfPlayers>1){ //if it isn't first two steps
+						type=3;
+						myWorld.statusBar.setStatus("Select the village you want to improve, it'll cost 2 corn + 3 Ore");
+					} else {
+						myWorld.statusBar.setStatus("You can't upgrade village now!!!");
+					}
+				}
+				frame.repaint();
+			}
+		});
+		inWin.setValueOnProgressBar(14);
+		rollTheDice.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(myWorld.checkEnd(checkSum)==-1){
+					if(!wereRolled && hod/numberOfPlayers>1){ //if they were not rolled yet and it isn't first two steps, roll the dice
+						myWorld.dice1.update();
+						myWorld.dice2.update();
+						int sum = myWorld.dice1.get()+myWorld.dice2.get();
+						myWorld.allocateRes(sum);
+						myWorld.statusBar.setStatus("You rolled the dice and the sum is "+sum+"!!!");
+						wereRolled=true;
+					} else if(wereRolled){ //if they were rolled yet
+						myWorld.statusBar.setStatus("You have already rolled the dice!!!");
+					} else if(hod/numberOfPlayers<=1){ //if it is first two steps
+						myWorld.statusBar.setStatus("You can't roll the dice during the first two moves!!!");
+					}
+				}
+				frame.repaint();
+			}
+		});
+		inWin.setValueOnProgressBar(15);
+		exchange.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(myWorld.checkEnd(checkSum)==-1){
+					if(hod/numberOfPlayers>1){ //if it isn't first two steps
+						ExchangeFrame exchangeFrame = new ExchangeFrame(Catan.this);
+					} else {
+						myWorld.statusBar.setStatus("You can't exchange resources now!!!");
+					}
+				}
+				frame.repaint();
+			}
+		});
+		inWin.setValueOnProgressBar(16);
+	}
+
+	private void addMoseListenerToFrame(){
+		myWorld.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int  mouseX=nearest(e.getX()), mouseY=nearest(e.getY()), t=myWorld.getTurn();
+				if(myWorld.checkEnd(checkSum)==-1){
+					// System.out.println("Eche ne konez");
+					if(hod/numberOfPlayers>1){//if it isn't first two rounds
+						if(type==1){//if road is chosen
+
+							if(state ==0){//if the beginning of the road is not selected
+								if(haveRes(t, "Road")){//if player has needed resourses
+									if(checkRoadStart(mouseX, mouseY, t, myWorld.road, myWorld.villa, myWorld.town)){//if we can start here
+										Road r = new Road(mouseX, mouseY, t);
+										sx=mouseX; sy=mouseY;
+
+										myWorld.statusBar.setStatus("The beginning of the road is marked");
+
+										myWorld.road.add(r);
+										state =1;//shows that start was selected
+									} else {
+										type=0;//reset the current mode
+
+										myWorld.statusBar.setStatus("You can't start road here!!!");
+									}
+								} else {
+									myWorld.statusBar.setStatus("You have no resources(((");
+									type=0;
+								}
+								frame.repaint();
+							} else if(state ==1){//if the start of the road was chosen
+
+								if(checkRoadEnd(sx, sy, mouseX, mouseY, myWorld.road)){//if the road does not overlap with another road
+
+									if(myWorld.road.get(myWorld.road.size()-1).end(mouseX, mouseY)){//if lenght of the road is equal to one
+										myWorld.statusBar.setStatus("The road was successfully built");
+										rmRes(t, "Road");
+										frame.repaint();
+									} else {
+										myWorld.statusBar.setStatus("You can't build this road!!!");
+										myWorld.road.remove(myWorld.road.size()-1);//delete this road, we can't build it
+										frame.repaint();
+									}
+								} else {
+									myWorld.statusBar.setStatus("You can't build this road!!!");
+									myWorld.road.remove(myWorld.road.size()-1);
+									frame.repaint();
+								}
+								state = 0;//
+								type = 0;//reset all params
+							}
+						} else if(type==2){//if village was chosen
+							if(haveRes(t, "Village")){
+								if(checkVillaR(mouseX, mouseY, t, myWorld.road, myWorld.villa, myWorld.town)){
+									//if the village is built along the road
+									Village v = new Village(mouseX, mouseY, t);
+									myWorld.villa.add(v);
+									myWorld.statusBar.setStatus("The Village was successfully built");
+									myWorld.updScore();
+									rmRes(t, "Village");
+								} else {
+									myWorld.statusBar.setStatus("You can't build village here!!!");
+								}
+							} else {
+								myWorld.statusBar.setStatus("You have no resources(((");
+							}
+							type=0;//reset type
+							frame.repaint();
+						} else if(type==3){
+							if(haveRes(t, "Town")){
+								int rmbl = checkTown(mouseX, mouseY, t, myWorld.villa);
+								//number of village, which we'll upgrade and remove from world
+								if(rmbl!=-1){//if it exists
+									Town city = new Town(mouseX, mouseY, t);	//\
+									myWorld.town.add(city);						// >|upgrade village
+									myWorld.villa.remove(rmbl);					///
+									myWorld.statusBar.setStatus("The Village was successfully upgraded");
+									rmRes(t, "Town");
+									myWorld.updScore();
+								} else {
+									myWorld.statusBar.setStatus("There is no Village to upgrade!!!");
+								}
+							} else {
+								myWorld.statusBar.setStatus("You have no resources(((");
+							}
+							type=0;
+							frame.repaint();
+						}
+					} else {//if it's first two rounds:
+						//						-the village can be built anywhere in the field;
+						//						-the village could not be improved until the city
+						//						-resources should not be written off
+						//otherwise the same as above
+						if(type==1){
+							if(state ==0){
+								if(checkRoadStart(mouseX, mouseY, t, myWorld.road, myWorld.villa, myWorld.town)){
+									Road r = new Road(mouseX, mouseY, t);
+									sx=mouseX;
+									sy=mouseY;
+									myWorld.statusBar.setStatus("The beginning of the road is marked");
+									frame.repaint();
+									myWorld.road.add(r);
+									state =1;
+								} else {
+									type=0;
+									myWorld.statusBar.setStatus("You can't start road here!!!");
+									frame.repaint();
+								}
+							} else if(state ==1){
+								if(checkRoadEnd(sx, sy, mouseX, mouseY, myWorld.road)){
+									if(myWorld.road.get(myWorld.road.size()-1).end(mouseX, mouseY)){
+										myWorld.statusBar.setStatus("The road was successfully built");
+										frame.repaint();
+									} else {
+										myWorld.statusBar.setStatus("You can't build this road!!!");
+										myWorld.road.remove(myWorld.road.size()-1);
+										frame.repaint();
+									}
+								} else {
+									myWorld.statusBar.setStatus("You can't build this road!!!");
+									myWorld.road.remove(myWorld.road.size()-1);
+									frame.repaint();
+								}
+								state = 0;
+								type = 0;
+							}
+						} else if(type==2){
+							if(checkVilla(mouseX, mouseY, myWorld.villa, myWorld.town)){
+								Village v = new Village(mouseX, mouseY, t);
+								myWorld.villa.add(v);
+								myWorld.statusBar.setStatus("The Village was successfully built");
+								myWorld.updScore();
+							} else {
+								myWorld.statusBar.setStatus("You can't build village here!!!");
+							}
+							type=0;
+							frame.repaint();
+						}
+					}
+				}
+				if(myWorld.checkEnd(checkSum)!=-1){
+					openFinalWindow();
+				}
+				frame.repaint();
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+		});
 	}
 
 	private int nearest(int mouse){//find the grid node closest to clicking the mouse

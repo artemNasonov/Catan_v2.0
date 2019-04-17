@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a42c60b-1843-4ca2-b693-1dfe1ca9b319" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Catan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Catan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/World.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,11 +23,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Catan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+            <state relative-caret-position="272">
+              <caret line="525" lean-forward="true" selection-start-line="525" selection-end-line="525" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#go#0;class#Catan#0" />
+                <element signature="method#addActionListenersToButtons#0;class#Catan#0" />
+                <element signature="method#addMoseListenerToFrame#0;class#Catan#0" />
+                <element signature="method#mouseClicked#0;class#6283:13514" />
                 <element signature="method#nearest#0;class#Catan#0" />
                 <element signature="method#checkRoadStart#0;class#Catan#0" />
                 <element signature="method#checkRoadEnd#0;class#Catan#0" />
@@ -45,20 +48,25 @@
                 <element signature="method#rmRes#0;class#Catan#0" />
                 <element signature="method#initPlayers#0;class#Catan#0" />
                 <element signature="method#openFinalWindow#0;class#Catan#0" />
-                <element signature="method#main#0;class#Catan#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="183" column="1" selection-start-line="183" selection-start-column="1" selection-end-line="183" selection-end-column="1" />
+            <state relative-caret-position="170">
+              <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#128#158#0" expanded="true" />
+                <element signature="e#163#193#0" expanded="true" />
+                <element signature="method#allocateRes#0;class#World#0" />
+                <element signature="method#addResToPlayer#0;class#World#0" />
+                <element signature="method#addRes#0;class#World#0" />
+                <element signature="method#resetScores#0;class#World#0" />
+                <element signature="method#updScore#0;class#World#0" />
+                <element signature="method#checkEnd#0;class#World#0" />
               </folding>
             </state>
           </provider>
@@ -73,14 +81,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Field.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="99" column="9" lean-forward="true" selection-start-line="99" selection-start-column="9" selection-end-line="99" selection-end-column="9" />
+            <state relative-caret-position="272">
+              <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#draw#0;class#Field#0" />
+                <element signature="method#setResource#0;class#Field#0" />
                 <element signature="e#2226#2402#0" />
               </folding>
             </state>
@@ -166,7 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Catan.java" />
         <option value="$PROJECT_DIR$/src/ExchangeFrame.java" />
         <option value="$PROJECT_DIR$/src/InitializationWindow.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
@@ -174,8 +182,9 @@
         <option value="$PROJECT_DIR$/src/Town.java" />
         <option value="$PROJECT_DIR$/src/Village.java" />
         <option value="$PROJECT_DIR$/src/WinnerWindow.java" />
-        <option value="$PROJECT_DIR$/src/World.java" />
         <option value="$PROJECT_DIR$/src/Field.java" />
+        <option value="$PROJECT_DIR$/src/Catan.java" />
+        <option value="$PROJECT_DIR$/src/World.java" />
       </list>
     </option>
   </component>
@@ -214,7 +223,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555444296595" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555534718719" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -257,7 +266,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1555426903833</updated>
-      <workItem from="1555426905870" duration="11208000" />
+      <workItem from="1555426905870" duration="19810000" />
     </task>
     <task id="LOCAL-00001" summary="Added screenshot, making code style more pretty">
       <created>1555434734927</created>
@@ -273,11 +282,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555434955819</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added jar file in project directory">
+      <created>1555444371952</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1555444371952</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11208000" />
+    <option name="totallyTimeSpent" value="19810000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -295,11 +311,11 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Version Control" weight="0.32843137" />
       <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.19934641" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22712418" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -317,6 +333,32 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added screenshot, making code style more pretty" />
@@ -420,24 +462,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/World.java">
+    <entry file="file://$PROJECT_DIR$/src/Field.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="183" column="1" selection-start-line="183" selection-start-column="1" selection-end-line="183" selection-end-column="1" />
+        <state relative-caret-position="272">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#128#158#0" expanded="true" />
+            <element signature="method#draw#0;class#Field#0" />
+            <element signature="method#setResource#0;class#Field#0" />
+            <element signature="e#2226#2402#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Catan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        <state relative-caret-position="272">
+          <caret line="525" lean-forward="true" selection-start-line="525" selection-end-line="525" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#go#0;class#Catan#0" />
+            <element signature="method#addActionListenersToButtons#0;class#Catan#0" />
+            <element signature="method#addMoseListenerToFrame#0;class#Catan#0" />
+            <element signature="method#mouseClicked#0;class#6283:13514" />
             <element signature="method#nearest#0;class#Catan#0" />
             <element signature="method#checkRoadStart#0;class#Catan#0" />
             <element signature="method#checkRoadEnd#0;class#Catan#0" />
@@ -456,19 +502,23 @@
             <element signature="method#rmRes#0;class#Catan#0" />
             <element signature="method#initPlayers#0;class#Catan#0" />
             <element signature="method#openFinalWindow#0;class#Catan#0" />
-            <element signature="method#main#0;class#Catan#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Field.java">
+    <entry file="file://$PROJECT_DIR$/src/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="99" column="9" lean-forward="true" selection-start-line="99" selection-start-column="9" selection-end-line="99" selection-end-column="9" />
+        <state relative-caret-position="170">
+          <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#draw#0;class#Field#0" />
-            <element signature="e#2226#2402#0" />
+            <element signature="e#163#193#0" expanded="true" />
+            <element signature="method#allocateRes#0;class#World#0" />
+            <element signature="method#addResToPlayer#0;class#World#0" />
+            <element signature="method#addRes#0;class#World#0" />
+            <element signature="method#resetScores#0;class#World#0" />
+            <element signature="method#updScore#0;class#World#0" />
+            <element signature="method#checkEnd#0;class#World#0" />
           </folding>
         </state>
       </provider>
