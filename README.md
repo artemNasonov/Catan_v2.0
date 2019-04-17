@@ -8,7 +8,7 @@ The implementation of the popular Catan board game on PC
 # How to install and play
 ## First way (Preferred)
 1. Download ```.jar```-file last version [from here](https://github.com/artemNasonov/Catan_v2.0/blob/master/Catan_v2.0.jar "Link to root of the project, yeah")
-2. Run it on your PC
+2. Run it on your PC. **Java 8 must be installed on your PC; if it isn't, you can download it [from here](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)**
 ## Second way
 1. Download all project
 2. Import it to [Intellij IDEA](https://www.jetbrains.com/idea/) or another development environment (it could be your console)))
@@ -41,5 +41,4 @@ The implementation of the popular Catan board game on PC
 # Screenshots
 + Initialization window: ![initialization window](Screenshots/Screenshot_Catan_v2.0_initWindow1.jpg)
 + Initialization window: ![initialization window](Screenshots/Screenshot_Catan_v2.0_initWindow2.jpg)
-+ Loading bar: ![loading bar](Screenshots/Screenshot_Catan_v2.0_statusBar.jpg)
 + Game process: ![game process](Screenshots/Screenshot_Catan_v2.0_1.jpg)
