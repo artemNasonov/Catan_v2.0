@@ -1,3 +1,7 @@
 *.class
 
-out/
+out/**
+
+!out/artifacts/Catan_v2_0_jar/*
+
+.idea/**

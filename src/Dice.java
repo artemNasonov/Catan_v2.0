@@ -6,14 +6,12 @@ import java.net.URL;
 public class Dice implements Variable{
 	int num=0;
 	int x, y;
-	URL textureWay;
 	Image texture;
 	Font traditionalArabicFont;
 
 	public Dice(){
-		textureWay=this.getClass().getResource("dice/Dice.png");
 		try{
-			texture = ImageIO.read(textureWay);
+			texture = ImageIO.read(this.getClass().getResource("dice/Dice.png"));
 		} catch (IOException e){
 			e.printStackTrace();
 		}
